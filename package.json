@@ -1,0 +1,57 @@
+{
+  "name": "ahj-dnd-trello",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Svetlana-Kutyeva1974/ahj-dnd-trello.git",
+  "scripts": {
+    "start": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "lint": "eslint .",
+    "test": "jest",
+    "coverage": "jest --coverage",
+    "e2e": "jest --testPathPattern=./e2e/ --runInBand --detectOpenHandles",
+    "doc": "jsdoc -c jsdoc.conf.json",
+    "preshow:coverage": "npm run coverage",
+    "show:coverage": "live-server coverage/lcov-report",
+    "preshow:doc": "npm run doc",
+    "show:doc": "live-server doc",
+    "preshow:dist": "npm run build",
+    "show:dist": "live-server dist"
+  },
+  "author": "Svetlana Kutyova <kutyovas@yandex.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "html-loader": "^1.3.2",
+    "html-webpack-plugin": "^4.5.1",
+    "jest": "^27.5.1",
+    "jsdoc": "^3.6.10",
+    "live-server": "^1.2.1",
+    "mini-css-extract-plugin": "^1.3.3",
+    "puppeteer": "^13.3.0",
+    "terser-webpack-plugin": "^5.0.3",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.1",
+    "webpack-merge": "^5.7.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "dependencies": {
+    "core-js": "^3.10.2"
+  }
+}

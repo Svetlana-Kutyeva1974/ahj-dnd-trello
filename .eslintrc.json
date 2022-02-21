@@ -1,0 +1,49 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+     "es6": true,
+     "browser": true,
+     "jest": true
+  },
+
+  "rules": {
+    /*
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["test/**"],
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    */
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "strict": 0,
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+        "no-else-return": ["error", {"allowElseIf": false}],
+        "prefer-destructuring": ["error", {"object": true, "array": true}],
+        "no-unused-vars": "warn",
+        "no-console": "off",
+        "no-alert": "off",
+        "func-names": "off",
+        "max-classes-per-file": "off",
+        "no-multiple-empty-lines": "warn",
+        "no-restricted-syntax": [
+        "error",
+        "LabeledStatement",
+        "WithStatement"
+        ],
+        "import/extensions": [
+        "error",
+        "ignorePackages"
+        ],
+        "import/no-unresolved": [
+      1,
+      {
+        "commonjs": false,
+        "amd": false
+      }
+    ]
+  }
+}
