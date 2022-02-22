@@ -118,20 +118,6 @@ export default class Widget {
       // document.getElementById('teg').onclick = function goAddWindow() {
       link.onclick = function goAddWindow() {
         console.log('link i this', this, link);
-        // const form = this.constructor.markupForm;
-        /*
-        const form = document.createElement('div');
-        form.innerHTML = `
-        <form data-widget="form-widget" class="flex">
-          <div class="form-control">
-            <input id="form-input" data-id="form-input" type="text" minlength="1" maxlength="19"
-            placeholder = "Enter title for this card...">
-          </div>
-          <button class = "button" data-id="form-submit">Add card</button>
-        </form>
-        `;
-        */
-        // form.innerHTML = this.constructor.markupForm;
         // form.style = 'text-align :left';
         link.style.display = 'none';
         // document.getElementById('teg').closest('div.desk-link')

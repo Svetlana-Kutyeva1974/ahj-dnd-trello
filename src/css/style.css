@@ -100,7 +100,18 @@
 }
 
 button, select {
+  display: inline-block;
   text-transform: none;
+  background-color: #7de779;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+  margin-left: 2%;
+  border-radius: 0.3rem;
+}
+
+.flex {
+  text-align: left;
 }
 
 button, input {
