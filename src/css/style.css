@@ -209,7 +209,11 @@ svg {
 }
 
 .desk-body {
-  margin: 1%;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  margin: 2%;
+  padding: 2%;
   background-color: #faf9fc;
   border-radius: 0.3rem;
   min-height: 50px;
@@ -219,4 +223,39 @@ a {
   text-decoration: none;
   color: #000000; /* цвет ссылки нав меню*/
   font-size: 1.2rem;
+}
+
+.task__remove {
+  position: relative;
+  font-size: 1.2rem;
+  text-align: right;
+  top: 1px;
+  /*left: 200px;*/
+}
+
+.visible {
+  display: none;
+}
+
+.div-body {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  width: 100%;
+  min-height: 50px;
+  background-color: #ffffff;
+  box-shadow: 0 0 0.1rem 0.1rem rgba(112, 109, 112, 0.5);
+  margin-bottom: 10px;
+  padding: 2%;
+}
+
+.div-body:last-child {
+  margin-bottom: 0;
+}
+
+input {
+  min-height: 30px;
+  width: 96%;
+  padding: 2%;
+  border-radius: 0.3rem;
 }

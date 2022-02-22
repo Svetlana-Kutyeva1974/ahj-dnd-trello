@@ -1,5 +1,7 @@
 // import isValid from './Validate.js';
 
+// import { Linter } from "eslint";
+
 export default class Widget {
   constructor(parentEl) {
     this.parentEl = parentEl;
@@ -28,6 +30,7 @@ export default class Widget {
         <strong> ToDo </strong>
       </div>
       <div class="desk-body">
+      
       </div>
       <div class="desk-link">
       <a  href="#" id = "teg" class="teg-link">+ Add another card</a>
@@ -46,6 +49,7 @@ export default class Widget {
         <strong> ToProcesing </strong>
       </div>
       <div class="desk-body">
+      
       </div>
       <div class="desk-link">
       <a  href="#" id = "teg" class="teg-link">+ Add another card</a>
@@ -64,6 +68,7 @@ export default class Widget {
         <strong> ToFinish </strong>
       </div>
       <div class="desk-body">
+      
       </div>
       <div class="desk-link">
       <a  href="#" id = "teg" class="teg-link">+ Add another card</a>
@@ -148,12 +153,19 @@ export default class Widget {
     e.preventDefault();
     const parentBody = e.target.closest('div.desk').children;
     const card = document.createElement('div');
+    const link = document.createElement('a');
+    link.href = '#';
+    link.innerHTML = '&#10006;';
+    link.classList.add('task__remove', 'visible');
+    card.classList.add('div-body');
     card.innerText = parentBody[2].children[1][0].value;
     console.log('arrlink i this', this, parentBody, '\n', e.target, '\n', card);
     parentBody[1].insertAdjacentElement('afterBegin', card);
+    card.insertAdjacentElement('beforeEnd', link);
     // none
     e.target.closest('.desk-link').children[1].style.display = 'none';
     e.target.closest('.desk-link').children[0].style.display = 'block';
+    e.target.previousElementSibling.children[0].value = '';// closest('#form-input').value = '';
     /*
     if (e.target.parentElement.children.length === 1) {
       this.createPopover();
