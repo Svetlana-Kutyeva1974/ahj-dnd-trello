@@ -115,21 +115,9 @@ export default class Trello {
             event.preventDefault();
             console.log('===========', event.target.children[0]);
             event.target.closest('.div-body').remove();
-            this.onDrag();// изменился массив ссылок, поэтому переделываем обработчики!
+            // card.onDrag();// изменился массив ссылок, поэтому переделываем обработчики!
+            // this.onDrag.bind(this);
           });
-          //
-          /*
-          card.onmouseleave = function (ev) {
-            ev.preventDefault();
-            if (ev.target.classList.contains('div-body')
-            && !ev.target.children[0].classList.contains('visible')) {
-              ev.target.children[0].classList.add('visible');
-              // e.target.style.background = 'blue';
-            }
-            return false;
-          };
-          */
-          //
         }
       };
       //
@@ -142,8 +130,9 @@ export default class Trello {
         }
         return false;
       };
-      //
-      this.onDrag();// изменился массив ссылок, поэтому переделываем обработчики!
+      // this.onDrag();
+      // card.onDrag();// изменился массив ссылок, поэтому переделываем обработчики!
+      // this.onDrag.bind(this);
     }
   }
 
@@ -401,7 +390,9 @@ export default class Trello {
       e.target.closest('.desk-link').children[0].style.display = 'block';
       e.target.closest('.buttons').previousElementSibling.children[0].value = '';// closest('#form-input').value = '';
       this.cardDelete();
-      this.onDrag.bind(this);
+      // card.onDrag();                    //  this.onDrag.bind(this);работает но не на том элементе
+      // this.onDrag.bind(card);
+      this.onDrag();
       /*
       if (e.target.parentElement.children.length === 1) {
         this.createPopover();
