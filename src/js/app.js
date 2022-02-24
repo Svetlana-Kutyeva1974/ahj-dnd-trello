@@ -2,7 +2,7 @@
  * Entry point of app:
  */
 
-import Widjet from './FormVidjet.js';
+import Trello from './trello.js';
 
-const buttonWidjet = new Widjet(document.querySelector('#button-container'));
-buttonWidjet.bindToDOM();
+const trelloWidjet = new Trello(document.querySelector('#trello-container'));
+trelloWidjet.bindToDOM();
