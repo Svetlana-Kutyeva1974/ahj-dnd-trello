@@ -4,12 +4,17 @@ export default class Trello {
   constructor(parentEl) {
     this.parentEl = parentEl;
     this.title = 'Тематическая подсказка';
+    this.storage = {
+      desk1: [],
+      desk2: [],
+      desk3: [],
+    };
   }
 
   static get markup() {
     return `
     <div class="board">
-      <div class="desk desk-1">
+      <div id= "1" class="desk desk-1">
         <div class="desk-title">
           <span> To Do </span>
         </div>
@@ -30,7 +35,7 @@ export default class Trello {
         </div>
       </div>
 
-      <div class="desk desk-2">
+      <div id= "2" class="desk desk-2">
         <div class="desk-title">
           <span> To Procesing </span>
         </div>
@@ -51,7 +56,7 @@ export default class Trello {
         </div>
       </div>
 
-      <div class="desk desk-3">
+      <div id= "2" class="desk desk-3">
         <div class="desk-title">
           <span> To Finish </span>
         </div>

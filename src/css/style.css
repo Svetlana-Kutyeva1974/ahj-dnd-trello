@@ -267,12 +267,13 @@ a.task-remove {
 }
 */
 .task__remove {
-  position: relative;
+  /*position: relative;*/
   font-size: 1.2rem;
   text-align: right;
   display: block;
   top: 1px;
   left: 90%;
+  cursor: pointer;
   /*flex-basis: auto;*/
   /*left: 200px;*/
 }
@@ -285,15 +286,16 @@ a.task-remove {
 .div-body {
   display: flex;
   flex-direction: row;
-  flex-basis: 100%;
-  flex-grow: 1;
+  justify-content: space-between;
+  /*flex-basis: 100%;
+  flex-grow: 1;*/
   text-align: left;
   width: 100%;
   min-height: 50px;
   background-color: #ffffff;
   box-shadow: 0 0 0.1rem 0.1rem rgba(112, 109, 112, 0.5);
   margin-bottom: 10px;
-  padding: 2%;
+  /*padding: 2%;*/
 }
 /*
 .div-body:hover {
@@ -315,15 +317,17 @@ textarea {
 
 .text {
   width: 70%;
+  flex-grow: 1;
 }
 
 .div-body.dragged {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   text-align: left;
-  flex-basis: 100%;
-  flex-grow: 1;
-  /*border-radius: 0.1rem;*/
+  /*flex-basis: 100%;
+  flex-grow: 1;*/
+  border-radius: 0.1rem;
   position: absolute;
   z-index: 999;
   pointer-events: none;
@@ -331,10 +335,9 @@ textarea {
   background: #ccc4e9;
   box-sizing: border-box;
   width: calc( ( 100% - 40px ) / 3 - 8%);
-  min-height: 50px;
+  /*min-height: 50px;*/
   margin-bottom: 10px;
-  padding: 2%;
-  margin: 2%;
+  /*margin: 2%;*/
   box-shadow: 0 0 0.1rem 0.1rem rgba(112, 109, 112, 0.5);
 }
 
