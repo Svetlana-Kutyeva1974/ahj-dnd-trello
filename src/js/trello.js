@@ -3,12 +3,14 @@
 export default class Trello {
   constructor(parentEl) {
     this.parentEl = parentEl;
-    this.title = 'Тематическая подсказка';
+    // this.title = 'Тематическая подсказка';
     this.storage = {
-      desk1: [],
-      desk2: [],
-      desk3: [],
+      // desk1: [],
+      // desk2: [],
+      // desk3: [],
     };
+    // this.onDrag = this.onDrag.bind(this);
+    // this.cardDelete = this.cardDelete.bind(this);
   }
 
   static get markup() {
@@ -21,10 +23,10 @@ export default class Trello {
         <div class="desk-body drop-area" data-id="drop-area">
         </div>
         <div class="desk-link">
-          <a  href="#" id = "teg" class="teg-link">+ Add another card</a>
+          <a  href="#" id = "teg" class="teg-link" onmousedown="return false">+ Add another card</a>
           <form data-widget="form-widget" class="flex" style = "display: none">
               <div class="form-control">
-              <textarea id="form-input" data-id="form-input" type="text" minlength="1" maxlength="19"
+              <textarea id="form-input" data-id="form-input" type="text" minlength="1" maxlength="100"
               placeholder = "Enter title for this card..."></textarea>
               </div>
               <div class="buttons">
@@ -42,10 +44,10 @@ export default class Trello {
         <div class="desk-body drop-area" data-id="drop-area">
         </div>
         <div class="desk-link">
-          <a  href="#" id = "teg" class="teg-link">+ Add another card</a>
+          <a  href="#" id = "teg" class="teg-link" onmousedown="return false">+ Add another card</a>
           <form data-widget="form-widget" class="flex" style = "display: none">
               <div class="form-control">
-                <textarea id="form-input" data-id="form-input" type="text" minlength="1" maxlength="19"
+                <textarea id="form-input" data-id="form-input" type="text" minlength="1" maxlength="100"
                 placeholder = "Enter title for this card..."></textarea>
               </div>
               <div class="buttons">
@@ -56,17 +58,17 @@ export default class Trello {
         </div>
       </div>
 
-      <div id= "2" class="desk desk-3">
+      <div id= "3" class="desk desk-3">
         <div class="desk-title">
           <span> To Finish </span>
         </div>
         <div class="desk-body drop-area" data-id="drop-area">
         </div>
         <div class="desk-link">
-          <a  href="#" id = "teg" class="teg-link">+ Add another card</a>
+          <a  href="#" id = "teg" class="teg-link" draggable ="false">+ Add another card</a>
           <form data-widget="form-widget" class="flex" style = "display: none">
             <div class="form-control">
-              <textarea id="form-input" data-id="form-input" type="text" minlength="1" maxlength="19"
+              <textarea id="form-input" data-id="form-input" type="text" minlength="1" maxlength="100"
               placeholder = "Enter title for this card..."></textarea>
             </div>
             <div class="buttons">
@@ -103,161 +105,54 @@ export default class Trello {
     return '[data-widget=button-widget]';
   }
 
+  init(arrExample) {
+    if (localStorage.getItem('trello') === null) {
+      this.storage = arrExample;
+    } else {
+      this.storage = JSON.parse(localStorage.getItem('trello'));
+    }
+  }
+
   cardDelete() {
     const cards = Array.from(document.querySelectorAll('.div-body'));
     console.log('cards i this', this, cards);
     for (const card of cards) {
-      card.onmouseenter = function (e) {
-        e.preventDefault();
-        if (e.target.classList.contains('div-body') && e.target.children[0].classList.contains('visible')) {
-          e.target.children[0].classList.remove('visible');
-          card.children[0].addEventListener('click', (event) => {
+      card.onmouseenter = function Enter(e) {
+        e.preventDefault();// если без span  то везде children 0!!!
+        if (e.target.classList.contains('div-body') && e.target.children[1].classList.contains('visible')) {
+          e.target.children[1].classList.remove('visible');
+          card.children[1].addEventListener('click', (event) => {
             event.preventDefault();
-            console.log('===========', event.target.children[0]);
+            console.log('===========', e.target.children[1], card.children[1]);
             event.target.closest('.div-body').remove();
+            // const id = event.target.closest('.desk').attribute('id');
+            // const desk = `desk${id}`;
+            // this.storage.desk1.innexOf('');
             // card.onDrag();// изменился массив ссылок, поэтому переделываем обработчики!
-            // this.onDrag.bind(this);
+            // setTimeout(() => this.onDrag, 0);
+            // this.onDrag();
           });
+          // this.onDrag();
+          // setTimeout(() => this.onDrag, 0);
         }
       };
+
       //
-      card.onmouseleave = function (ev) {
+      card.onmouseleave = function Leave(ev) {
         ev.preventDefault();
         if (ev.target.classList.contains('div-body')
-        && !ev.target.children[0].classList.contains('visible')) {
-          ev.target.children[0].classList.add('visible');
+        && !ev.target.children[1].classList.contains('visible')) {
+          ev.target.children[1].classList.add('visible');
           // e.target.style.background = 'blue';
         }
-        return false;
+        // return false;
       };
-      // this.onDrag();
+      // setTimeout(() => this.onDrag, 0);
       // card.onDrag();// изменился массив ссылок, поэтому переделываем обработчики!
       // this.onDrag.bind(this);
+      // this.parentElement.onDrag();
     }
-  }
-
-  onDrag() {
-  // обработка Drag
-    const desks = Array.from(document.querySelectorAll('.desk-body')); //  доскb 3
-    // const desks = document.querySelectorAll('[data-id=drop-area]');
-    const cards = Array.from(document.querySelectorAll('.div-body')); // карточки в досках
-    console.log('cards i desks this drog-------', this, cards, '\n', desks);
-    /*
-    let draggedEl = null;
-    let ghostEl = null;
-    */
-    // for (const element of cards) {
-    for (const element of desks) {
-      let draggedEl = null;
-      let ghostEl = null;
-
-      element.addEventListener('dragstart', (e) => {
-        e.preventDefault();
-        e.target.classList.add('selected');
-        draggedEl = element;
-      });
-
-      element.addEventListener('dragend', (e) => {
-        e.preventDefault();
-        e.target.classList.remove('selected');
-      });
-
-      element.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        if (!e.target.classList.contains('div-body')) {
-          return;
-        }
-        draggedEl = e.target;
-        console.log('тянем это', draggedEl);
-        ghostEl = e.target.cloneNode(true);
-        ghostEl.classList.add('dragged');
-        document.body.appendChild(ghostEl);
-        ghostEl.style.position = 'absolute';
-        ghostEl.style.zIndex = 1000;
-        ghostEl.style.left = `${e.pageX - ghostEl.offsetWidth / 2}px`;
-        ghostEl.style.top = `${e.pageY - ghostEl.offsetHeight / 2}px`;
-        console.log('скопировали это', ghostEl);
-      });
-      // тянем
-      element.addEventListener('mousemove', (e) => {
-        e.preventDefault(); // не даём выделять элементы
-        if (!draggedEl) {
-          return;
-        }
-        ghostEl.style.left = `${e.pageX - ghostEl.offsetWidth / 2}px`;
-        ghostEl.style.top = `${e.pageY - ghostEl.offsetHeight / 2}px`;
-      });
-
-      element.addEventListener('mouseleave', (e) => {
-        // при уходе курсора за границы контейнера - отменяем перенос
-        console.log(e);
-        if (!draggedEl) {
-          return;
-        }
-        document.body.removeChild(ghostEl);
-        ghostEl = null;
-        draggedEl = null;
-      });
-
-      element.addEventListener('mouseup', (e) => {
-        if (!draggedEl) {
-          return;
-        }
-        /*
-        const closest = document.elementFromPoint(e.clientX, e.clientY);
-        e.currentTarget.insertBefore(draggedEl, closest);
-        document.body.removeChild(ghostEl);
-        ghostEl = null;
-        draggedEl = null;
-        */
-        const closest = document.elementFromPoint(e.clientX, e.clientY);
-        const { top } = closest.getBoundingClientRect();
-        if (e.pageY > window.scrollY + top + closest.offsetHeight / 2) {
-          e.currentTarget.insertBefore(draggedEl, closest.nextElementSibling);
-        } else {
-          e.currentTarget.insertBefore(draggedEl, closest);
-        }
-        document.body.removeChild(ghostEl);
-        ghostEl = null;
-        draggedEl = null;
-      });
-      //
-      // const drop = document.querySelector('[data-id=drop-area]');
-      element.addEventListener('dragover', (evt) => {
-        evt.preventDefault();
-        // const activeElement = element.querySelector('.selected');
-      });
-      element.addEventListener('drop', function (evt) {
-        evt.preventDefault();
-        this.style.backgroundColor = 'rgba(0,0,0,0)';
-        this.append(draggedEl);
-      });
-      //
-      // для всех досок принятие элемента
-      /*
-      for (const desk of desks) {
-        // const dropEl = document.querySelector('[data-id=drop-area]');
-        const dropEl = desk;
-        dropEl.addEventListener('dragover', (evt) => {
-          evt.preventDefault();
-        });
-
-        dropEl.addEventListener('dragenter', function (ev) {
-          ev.preventDefault();
-          this.style.backgroundColor = 'rgba(0,0,0,.3)';
-        });
-
-        dropEl.addEventListener('dragleave', function (e) {
-          // ev.preventDefault();
-          this.style.backgroundColor = 'rgba(0,0,0,0)';
-        });
-        dropEl.addEventListener('drop', function (e) {
-          this.style.backgroundColor = 'rgba(0,0,0,0)';
-          this.append(draggedEl);
-        });
-      }
-      */
-    }// for  карточки
+    // this.onDrag();
   }
 
   bindToDOM() {
@@ -282,7 +177,7 @@ export default class Trello {
     for (const button of buttons) {
       button.addEventListener('click', (e) => this.onClick(e));
     }
-    // обработчики ссылок 2
+    // обработчики ссылок 2 закрытие формы добавления
     const arrLink2 = Array.from(document.querySelectorAll('.close-link'));
     // ccskrb1
     console.log('arrlink i this', this, arrLink2);
@@ -297,11 +192,189 @@ export default class Trello {
         return false;
       };
     }
-
     // 2
-
     // обработка Drag
+    const desks = Array.from(document.querySelectorAll('.desk-body')); //  прлощадь доскb 3
+    // const desks = document.querySelectorAll('[data-id=drop-area]');
+    const cards = Array.from(document.querySelectorAll('.div-body')); // карточки в досках
+    console.log('cards i desks this drog!!!-------', this, cards, '\n', desks);
     /*
+        let draggedEl = null;
+        let ghostEl = null;
+        */
+    for (const element of desks) {
+      element.addEventListener('click', (e) => this.onDrag(e));
+    }
+  }// bind
+
+  onClick(e) {
+    e.preventDefault();
+    const parentBody = e.target.closest('div.desk').children;
+    if (parentBody[2].children[1][0].value) {
+    // создание карточки и ссылки ее удаления
+      const card = document.createElement('div');
+      const link = document.createElement('a');
+      const text = document.createElement('span');
+      link.href = '#';
+      link.innerHTML = '&#10006;';
+      link.classList.add('task__remove', 'visible');
+      card.classList.add('div-body');
+      text.classList.add('texts');
+      text.innerHTML = parentBody[2].children[1][0].value;
+      card.draggable = 'true';
+      // card.innerText = parentBody[2].children[1][0].value;
+      // card.innerHTML = `<span class="text">${parentBody[2].children[1][0].value}</span>`;
+      console.log('arrlink i this', this, parentBody, '\n', e.target, '\n', card, '\n', text);
+      parentBody[1].insertAdjacentElement('afterBegin', card);
+      card.insertAdjacentElement('beforeEnd', link);
+      card.insertAdjacentElement('afterBegin', text);
+      // none
+      e.target.closest('.desk-link').children[1].style.display = 'none';
+      e.target.closest('.desk-link').children[0].style.display = 'block';
+      e.target.closest('.buttons').previousElementSibling.children[0].value = '';
+      // closest('#form-input').value = '';
+      // this.cardDelete();
+
+      this.cardDelete();
+      // this.onDrag();
+      // card.onDrag();                    //  this.onDrag.bind(this);работает но не на том элементе
+      // this.onDrag.bind(card);
+      // this.onDrog(); // не надо тк вызывается в делите
+      // this.onDrag();
+    }
+    // this.onDrag();// ---------------------------
+  }// onClick
+
+  onDrag(ev) {
+    const desks = Array.from(document.querySelectorAll('.desk-body')); //  прлощадь доскb 3
+    // const desks = document.querySelectorAll('[data-id=drop-area]');
+    const cards = Array.from(document.querySelectorAll('.div-body')); // карточки в досках
+    console.log('cards i desks this drog!!!-------', this, cards, '\n', desks, ev);
+    /*
+        let draggedEl = null;
+        let ghostEl = null;
+        */
+    // for (const element of cards) {
+    let draggedEl = null;
+    let ghostEl = null;
+
+    // const element = document.querySelector('#trello-container'); //  прлощадь доскb 3
+    // const element = document.querySelector('.board');
+    /*
+    const element = this.parentEl.querySelector('.board');
+    */
+
+    const element = ev.target.closest('.desk-body');
+    // const element = ev.target;
+    console.log('desk drog!!!-------', element);
+    element.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+      // e.target.closest('.div-body').classList.add('selected');
+      e.target.classList.add('selected');
+      console.log('selected-------', this, e.target, e.carrentTarget, '\n');
+      e.target.style.backgroundColor = 'green';
+      draggedEl = element;
+    });
+
+    element.addEventListener('dragend', (e) => {
+      e.preventDefault();
+      e.target.classList.remove('selected');
+    });
+
+    element.addEventListener('mousedown', (e) => {
+      // e.preventDefault();
+      /*
+      if (e.target.classList.contains('desk-link') || e.target.classList.contains('flex')
+      || e.target.closest('#form-input') || e.target.classList.contains('button')
+      || e.target.classList.contains('close-link')) {
+        return;
+      }
+      */
+
+      // if (e.target.closest('.desk-link')) { return; }
+      /*
+        const target = e.target.closest('div.div-body');
+        if (!target) {
+
+      */
+      e.preventDefault();
+      if (!e.target.classList.contains('div-body')) {
+        return;
+      }
+      if (e.target.classList.contains('div-body')) {
+        e.target.style.cursor = 'grabbing';
+        draggedEl = e.target;
+        console.log('тянем это', draggedEl);
+        ghostEl = e.target.cloneNode(true);
+        ghostEl.classList.add('dragged');
+        document.body.appendChild(ghostEl);
+        ghostEl.style.position = 'absolute';
+        ghostEl.style.zIndex = 1000;
+        ghostEl.style.left = `${e.pageX - ghostEl.offsetWidth / 2}px`;
+        ghostEl.style.top = `${e.pageY - ghostEl.offsetHeight / 2}px`;
+        console.log('скопировали это', ghostEl);
+      }
+    });
+    // тянем
+    element.addEventListener('mousemove', (e) => {
+      e.preventDefault(); // не даём выделять элементы
+      if (!draggedEl) {
+        return;
+      }
+      ghostEl.style.left = `${e.pageX - ghostEl.offsetWidth / 2}px`;
+      ghostEl.style.top = `${e.pageY - ghostEl.offsetHeight / 2}px`;
+    });
+
+    element.addEventListener('mouseleave', (e) => {
+      // при уходе курсора за границы контейнера - отменяем перенос
+      console.log(e);
+      if (!draggedEl) {
+        return;
+      }
+      document.body.removeChild(ghostEl);
+      ghostEl = null;
+      draggedEl = null;
+    });
+
+    element.addEventListener('mouseup', (e) => {
+      if (!draggedEl) {
+        return;
+      }
+      /*
+            const closest = document.elementFromPoint(e.clientX, e.clientY);
+            e.currentTarget.insertBefore(draggedEl, closest);
+            document.body.removeChild(ghostEl);
+            ghostEl = null;
+            draggedEl = null;
+            */
+      const closest = document.elementFromPoint(e.clientX, e.clientY);
+      const { top } = closest.getBoundingClientRect();
+      if (e.pageY > window.scrollY + top + closest.offsetHeight / 2) {
+        e.currentTarget.insertBefore(draggedEl, closest.nextElementSibling);
+      } else {
+        e.currentTarget.insertBefore(draggedEl, closest);
+      }
+      document.body.removeChild(ghostEl);
+      ghostEl = null;
+      draggedEl = null;
+    });
+    //
+    // const drop = document.querySelector('[data-id=drop-area]');
+    element.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      // const activeElement = element.querySelector('.selected');
+    }, { capture: true });
+
+    element.addEventListener('drop', function (e) {
+      e.preventDefault();
+      // this.style.backgroundColor = 'rgba(0,0,0,0)';
+      this.append(draggedEl);
+    });
+    // }// for desks
+  } // on Drog
+}
+
+/*
     const cards = Array.from(document.querySelectorAll('.div-body'));
     console.log('cards i this', this, cards);
 
@@ -365,81 +438,7 @@ export default class Trello {
       });
     }
     */
-  }
-
-  onClick(e) {
-    e.preventDefault();
-    const parentBody = e.target.closest('div.desk').children;
-    if (parentBody[2].children[1][0].value) {
-    // создание карточки и ссылки ее удаления
-      const card = document.createElement('div');
-      const link = document.createElement('a');
-      link.href = '#';
-      link.innerHTML = '&#10006;';
-      link.classList.add('task__remove', 'visible');
-      card.classList.add('div-body');
-
-      card.draggable = 'true';
-      card.innerText = parentBody[2].children[1][0].value;
-      // card.innerHTML = `<span class="text">${parentBody[2].children[1][0].value}</span>`;
-      console.log('arrlink i this', this, parentBody, '\n', e.target, '\n', card);
-      parentBody[1].insertAdjacentElement('afterBegin', card);
-      card.insertAdjacentElement('beforeEnd', link);
-      // none
-      e.target.closest('.desk-link').children[1].style.display = 'none';
-      e.target.closest('.desk-link').children[0].style.display = 'block';
-      e.target.closest('.buttons').previousElementSibling.children[0].value = '';// closest('#form-input').value = '';
-      this.cardDelete();
-      // card.onDrag();                    //  this.onDrag.bind(this);работает но не на том элементе
-      // this.onDrag.bind(card);
-      this.onDrag();
-      /*
-      if (e.target.parentElement.children.length === 1) {
-        this.createPopover();
-      } else {
-        e.target.parentElement.children[1].remove();
-      }
-      */
-    }
-  }
-
-  createPopover() {
-    const first = this.parentEl.querySelector(this.constructor.buttonSelector);// = button
-    const popover = document.createElement('div');
-    popover.className = 'popover fade show bs-popover-top';// 'div-propover';
-    // popover.textContent = 'Большой текст сообщения об ошибке';
-
-    const popoverBody = document.createElement('div');
-    popoverBody.className = 'popover-body';
-    popoverBody.textContent = 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus';
-
-    const popoverHead = document.createElement('h3');
-    popoverHead.className = 'popover-header';
-    popoverHead.textContent = this.title;
-
-    const arrow = document.createElement('div');
-    arrow.className = 'arrow';
-
-    popover.appendChild(arrow);
-    popover.appendChild(popoverHead);
-    popover.appendChild(popoverBody);
-
-    first.offsetParent.appendChild(popover);
-    popover.style.top = `${first.offsetTop - popover.offsetHeight - 20}px`;
-    popover.style.left = `${first.offsetLeft + first.offsetWidth / 2 - popover.offsetWidth / 2}px`;
-    arrow.style.left = 'calc(50% - 10px)';
-    arrow.style.top = `${popover.offsetHeight - 3}px`;
-    arrow.classList.add('top');
-    // console.log('кнопка', this.button);
-  }
-}
 /*
-<button type="button" class="btn btn-secondary"
-data-id= "button-widjet" data-container="body"
-data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel
-augue laoreet rutrum faucibus.">
-Popover on top
-</button>
 
 <span class="SVGInline components-lms-Execution-components-Menu--openIcon--3UvUz"><svg class="SVGInline-svg components-lms-Execution-components-Menu--openIcon--3UvUz-svg" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g opacity="0.5">
@@ -456,5 +455,6 @@ Popover on top
   <ellipse rx="2" ry="2" transform="matrix(1 -8.74228e-08 -8.74228e-08 -1 4 14)"
   fill="#333333"></ellipse>
   </g>
-</svg></span>
+  </svg>
+</span>
 */

@@ -105,7 +105,7 @@
   box-shadow: 0 0 0.2rem 0.2rem rgb(225 83 97 / 50%);
 }
 
-button, select {
+button {
   display: inline-block;
   text-transform: none;
   background-color: #7de779;
@@ -142,35 +142,6 @@ button, textarea {
   overflow: visible;
 }
 
-.popover {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-  z-index: 1060;
-  display: block;
-  max-width: 276px;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: center;
-  text-decoration: none;
-  text-shadow: none;
-  text-transform: none;
-  letter-spacing: normal;
-  word-break: normal;
-  word-spacing: normal;
-  white-space: normal;
-  line-break: auto;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.2);
-  border-radius: 0.3rem;
-}
 
 .fade {
   transition: opacity .15s linear;
@@ -247,11 +218,13 @@ svg {
   display: flex;
   flex-direction: column;
   align-content: flex-start;
-  margin: 2%;
-  padding: 2%;
+  margin: 5%;
+  padding: 5%;
   background-color: #faf9fc;
   border-radius: 0.3rem;
   min-height: 50px;
+  /*overflow-wrap: break-word;*/
+  word-break: break-all;
 }
 
 a {
@@ -276,9 +249,10 @@ a.task-remove {
   cursor: pointer;
   /*flex-basis: auto;*/
   /*left: 200px;*/
+  
 }
 
-.visible {
+a.task__remove.visible {
   display: none;
 }
 
@@ -295,6 +269,7 @@ a.task-remove {
   background-color: #ffffff;
   box-shadow: 0 0 0.1rem 0.1rem rgba(112, 109, 112, 0.5);
   margin-bottom: 10px;
+  word-break: break-all;
   /*padding: 2%;*/
 }
 /*
@@ -315,9 +290,10 @@ textarea {
   text-align: left;
 }
 
-.text {
-  width: 70%;
-  flex-grow: 1;
+.texts {
+  width: 90%;
+
+  /*flex-grow: 1;*/
 }
 
 .div-body.dragged {
@@ -334,7 +310,7 @@ textarea {
   cursor: grabbing;
   background: #ccc4e9;
   box-sizing: border-box;
-  width: calc( ( 100% - 40px ) / 3 - 8%);
+  width: calc( ( 100% - 40px ) / 3);
   /*min-height: 50px;*/
   margin-bottom: 10px;
   /*margin: 2%;*/
@@ -351,4 +327,9 @@ textarea {
   min-height: 50px;
   margin-bottom: 10px;
  /* border: 1px dashed red;*/
+}
+
+.selected {
+  background-color: #e7e579;
+  /*flex-grow: 1;*/
 }
