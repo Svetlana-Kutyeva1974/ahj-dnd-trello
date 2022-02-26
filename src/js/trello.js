@@ -167,8 +167,7 @@ export default class Trello {
         console.log('link i this', this, link);
         link.style.display = 'none';
         link.nextElementSibling.style.display = 'block';
-        // предотвращаем переход по ссылке href
-        return false;
+        
       };
     }
     // обработка кнопок добавления
@@ -193,18 +192,15 @@ export default class Trello {
       };
     }
     // 2
-    // обработка Drag
-    const desks = Array.from(document.querySelectorAll('.desk-body')); //  прлощадь доскb 3
+    // обработка Drag убрала пока
+    //const desks = Array.from(document.querySelectorAll('.desk-body')); //  прлощадь доскb 3
     // const desks = document.querySelectorAll('[data-id=drop-area]');
-    const cards = Array.from(document.querySelectorAll('.div-body')); // карточки в досках
-    console.log('cards i desks this drog!!!-------', this, cards, '\n', desks);
-    /*
-        let draggedEl = null;
-        let ghostEl = null;
-        */
-    for (const element of desks) {
+    //const cards = Array.from(document.querySelectorAll('.div-body')); // карточки в досках
+    //console.log('cards i desks this drog!!!-------', this, cards, '\n', desks);
+    /*for (const element of desks) {
       element.addEventListener('click', (e) => this.onDrag(e));
-    }
+    }*/
+     // card. element.addEventListener('', (e) => this.onDrag(e));
   }// bind
 
   onClick(e) {
