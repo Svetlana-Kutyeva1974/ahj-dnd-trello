@@ -1,4 +1,4 @@
-// import isValid from './Validate.js';
+
 
 export default class Trello {
   constructor(parentEl) {
@@ -132,7 +132,7 @@ export default class Trello {
             // setTimeout(() => this.onDrag, 0);
             // this.onDrag();
           });
-          // this.onDrag();
+          // !!! this.onDrag(event);сюда слушатель зажатия кнопки, вызов на event
           // setTimeout(() => this.onDrag, 0);
         }
       };
